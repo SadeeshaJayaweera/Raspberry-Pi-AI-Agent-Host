@@ -1,182 +1,149 @@
-# Raspberry Pi AI Agent Host
+# Raspberry Pi AI Agent Host Tutorial
 
+In this tutorial, you will learn how to set up and use the Raspberry Pi AI Agent Host, a powerful environment for AI development on a Raspberry Pi 4 with 8GB RAM. This tutorial covers the key features, installation steps, and usage guidelines for the AI Agent Host. Let's get started!
 
-## Simplified Summary
+## Table of Contents
 
- The AI Agent Host can be complex given that it involves several aspects such as AI, edge computing, Docker, and Raspberry Pi. Let me attempt to simplify it:  
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [AI Agent Host Setup](#ai-agent-host-setup)
+   1. [Prerequisites](#prerequisites)
+   2. [Installation](#installation)
+4. [Usage](#usage)
+5. [Frequently Asked Questions](#frequently-asked-questions)
+6. [Architecture Diagram](#architecture-diagram)
+7. [References](#references)
 
-The AI Agent Host is essentially a setup that allows you to run AI applications directly on a Raspberry Pi, which is a small, low-cost computer often used in various tech projects.  
+## Introduction
 
-The AI Agent Host functions as a "host" for an AI "agent". These applications can interact with live data, coming from either online sources (APIs) or the Raspberry Pi's own sensors, to make decisions or predictions.  
-
-Moreover, the AI Agent Host is designed to be modular, which means you can add or remove different components depending on what your project needs. For example, if you need a specific database or visualization tool, you can add it to the setup.  
-
-Also, you can use this setup in combination with a powerful GPU server. So, if you have tasks that are too demanding for the Raspberry Pi, you can send them to this server for processing. This is made possible with the inclusion of CodeServer and remote connection to a JupyterHub installed on the GPU server.  
-
-Finally, the AI Agent Host uses lightweight services like QuestDB and Grafana, suitable for the Raspberry Pi's limited resources, and is optimized for DietPi, a lightweight operating system ideal for single-board computers like Raspberry Pi.  
-
-I hope this explanation helps simplify the concept of the AI Agent Host. If you have any further questions or if something is still unclear, feel free to ask!  
+The AI Agent Host is an innovative environment for running AI applications on a Raspberry Pi. It's designed for AI development and is modular, making it highly customizable for various projects. The AI Agent Host can work with live data from APIs and Raspberry Pi sensors, making it ideal for real-time data analysis and decision-making.
 
 ## Features
 
-The AI Agent Host, designed specifically for AI development, offers several key features making it an ideal solution for Raspberry Pi 4 with 8GB RAM, especially when running DietPi OS:
+The AI Agent Host offers several key features that make it a powerful tool for AI development on a Raspberry Pi 4 with 8GB RAM:
 
-1. **Modular Environment**: The AI Agent Host is built as a module-based system, allowing different components to be added or removed based on the requirements of the project. This is perfect for the customizable nature of Raspberry Pi. Furthermore, by adding an AI Agent container, the AI Agent Host can be transformed into an AI Agent Lab, expanding its capabilities for AI development and experimentation.
+1. **Modular Environment**: You can add or remove components based on project requirements, making it highly customizable.
 
-2. **Live Data Interaction**: With the ability to work with live data from both APIs and Raspberry Pi's own sensors, AI Agent Host becomes a powerful tool for real-time data analysis, modeling, and decision-making.
+2. **Live Data Interaction**: The AI Agent Host can work with live data from APIs and Raspberry Pi sensors.
 
-3. **Lightweight Services**: Services like QuestDB and Grafana used in the AI Agent Host are lightweight yet robust, making them suitable for the Raspberry Pi's limited hardware resources compared to larger servers.
+3. **Lightweight Services**: It includes lightweight services like QuestDB and Grafana, optimized for Raspberry Pi's limited resources.
 
-4. **Remote Development Capabilities**: The inclusion of Code-Server allows you to connect to a remote JupyterHub installed on a powerful GPU Server when necessary, using Raspberry Pi as the Docker host.
+4. **Remote Development**: You can connect to a remote JupyterHub for GPU server processing.
 
-5. **Data Handling and Visualization**: QuestDB for efficient data handling and Grafana for intuitive data visualization are integral for any AI and machine learning projects.
+5. **Data Handling and Visualization**: QuestDB and Grafana are included for efficient data handling and visualization.
 
-6. **Optimized for DietPi**: The AI Agent Host's compatibility with DietPi, a lightweight OS optimized for single-board computers like Raspberry Pi, ensures efficient use of the Raspberry Pi's hardware resources.
+6. **Optimized for DietPi**: The AI Agent Host is compatible with DietPi, a lightweight OS for single-board computers.
 
-7. **Community Support**: With active communities for both Raspberry Pi and AI Agent Host, you can expect robust support and resources for your AI development projects.
+7. **Community Support**: Active communities provide support and resources for AI development projects.
 
-These features make the AI Agent Host a dynamic, effective, and efficient environment for AI development on a Raspberry Pi 4 with 8GB RAM, especially for projects involving real-time or sensor data.
+## AI Agent Host Setup
 
+### Prerequisites
 
-## AI Agent Host: A Novel Approach to Edge Computing
+Before setting up the AI Agent Host, ensure you have the following prerequisites:
 
-The AI Agent Host offers an innovative setup, connecting edge devices like the Raspberry Pi to a JupyterHub on a remote GPU server. This unique configuration, part of a broader trend known as edge computing, enables real-time data analysis and decision-making on the edge while offloading computationally intensive tasks to a GPU server in the cloud.
+- A Raspberry Pi 4 with 8GB RAM.
+- Docker installed on your Raspberry Pi.
 
-While this specific setup is not commonly seen or standardized, it adds significant value to fields that require real-time data analysis and decision-making capabilities at the edge. Potential applications include autonomous vehicles, Internet of Things (IoT), robotics, and more.
+### Installation
 
-One of the primary challenges in edge computing is developing an infrastructure that allows for seamless communication and integration between edge devices and cloud servers. The AI Agent Host provides a powerful solution to this challenge, offering a framework that could potentially standardize these interactions.
+Follow these steps to set up the AI Agent Host on your Raspberry Pi:
 
-As the AI industry continues to evolve rapidly, this innovative approach may become more commonplace. The AI Agent Host is at the forefront of this technological development, paving the way for new use cases and implementations.
+1. Open a terminal on your Raspberry Pi.
 
-Please note that while we strive to keep this document up-to-date, the field of AI is continuously evolving. For the latest information and developments, we recommend staying active in relevant online communities and keeping up with the latest research.
+2. Run the following command to install necessary software components:
 
+   ```shell
+   dietpi-software
+   ```
 
-## Getting Started 
+   Select the following software items to install:
 
-To use the AI Agent Host, follow these steps:
+   - I2C
+   - Prometheus Node Exporter
+   - Docker Compose
+   - Docker
+   - Git
 
-1. Set up or use an existing environment with Docker installed.
+3. Reboot your Raspberry Pi:
 
-With root:dietpi login credentials:
+   ```shell
+   sudo shutdown -r now
+   ```
 
-Run dietpi-software from the command line.
+4. Clone the AI Agent Host repository and navigate to the docker directory:
 
-```
-dietpi-software
-```
+   ```shell
+   umask 0002
+   git clone https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host.git
+   umask 0022
+   cd Raspberry-Pi-AI-Agent-Host/docker
+   ```
 
-Choose Browse Software and select I2C, Prometheus Node Exporter, Docker Compose, Docker and Git. Finally select Install.
-DietPi will do all the necessary steps to install and start these software items.
-
-
-```
-             |  [*] 72  I2C: enables support for I2C based hardware
-
-             |  [*] 99   Prometheus Node Exporter: Prometheus exporter for hardware and OS metrics
-
-             │  [*] 134  Docker Compose: Manage multi-container Docker applications                 
-                 
-             │  [*] 162  Docker: Build, ship, and run distributed applications    
-
-             |  [*] 17   Git: Clone and manage Git repositories locally                                  
-
-```
-2. Reboot
-
-```
-sudo shutdown -r now
-```
-
-3. Clone the AI Agent Host repository and navigate to the docker directory.
-
-with dietpi:dietpi login credentials:
-
-```
-umask 0002
-git clone https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host.git
-umask 0022
-cd Raspberry-Pi-AI-Agent-Host/docker
-
-```
-
-Then follow the prerequisites section in this [Tutorial](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/tests) for guidance.
+5. Follow the prerequisites section in this [Tutorial](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/tests) for guidance.
 
 ## Usage
 
-### 1 Once the services are up and running, you can access the AI Agent Host interfaces:
+Once you have set up the AI Agent Host, you can access its interfaces and start working on AI projects:
 
-- QuestDB: Visit https://questdb.domain.tld in your web browser.
-- Grafana: Visit https://grafana.domain.tld in your web browser.
-- Code-Server: Visit https://vscode.domain.tld in your web browser.
+1. Access the AI Agent Host interfaces:
 
-### 2 To connect the AI Agent Host to a remote JupyterHub environment from Code-Server:
+   - QuestDB: Visit https://questdb.domain.tld in your web browser.
+   - Grafana: Visit https://grafana.domain.tld in your web browser.
+   - Code-Server: Visit https://vscode.domain.tld in your web browser.
 
-1. Set up or use an existing remote JupyterHub that includes the necessary dependencies for working with your notebooks and data.
+2. Connect the AI Agent Host to a remote JupyterHub environment from Code-Server. This allows you to offload computationally intensive tasks to a GPU server.
 
-2. Connect to the remote JupyterHub environment from within the Code-Server interface provided by the AI Agent Host
+3. Start working with your notebooks and data using the pre-installed tools and libraries included in your remote environment.
 
-### 3 Start working with your notebooks and data, using the pre-installed tools and libraries included in your remote environment.
+You can also run existing notebooks provided in the project folder within VSCode:
 
-You can also run the existing notebooks in the project folder within VSCode. 
-
-[Weather Station](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/notebooks/weather-station) 
-
-[GPS Tracker](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/notebooks/vehicle-tracking) 
-
-
+- [Weather Station](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/notebooks/weather-station)
+- [GPS Tracker](https://github.com/quantiota/Raspberry-Pi-AI-Agent-Host/tree/main/notebooks/vehicle-tracking)
 
 ## Frequently Asked Questions
 
-1. **What is the AI Agent Host?**
-   The AI Agent Host is a Dockerized environment designed for AI development. It's built on a modular system that allows different components to be added or removed based on the requirements of the project.
+1. **What is the AI Agent Host?**  
+   The AI Agent Host is a Dockerized environment designed for AI development. It's modular, allowing you to customize components based on project requirements.
 
-2. **Why use the AI Agent Host on a Raspberry Pi 4 8GB?**
-   The AI Agent Host is lightweight yet powerful, making it suitable for the Raspberry Pi's limited hardware resources. It's designed to work with live data from both APIs and Raspberry Pi's own sensors, making it a powerful tool for real-time data analysis, modeling, and decision-making.
+2. **Why use the AI Agent Host on a Raspberry Pi 4 8GB?**  
+   It's lightweight yet powerful, suitable for the Raspberry Pi's limited hardware resources, and can work with live data from APIs and sensors.
 
-3. **Which services does the AI Agent Host include?**
-   The AI Agent Host includes services such as Code-Server (a code editor), Grafana (a visualization tool), and QuestDB (a database). Additional services can be added or removed as needed.
+3. **Which services does the AI Agent Host include?**  
+   It includes Code-Server, Grafana, QuestDB, and more. Additional services can be added.
 
-4. **What do I need to connect to the Code-Server from a browser with HTTPS?**
-   A fully qualified domain name (FQDN) is necessary to connect to the Code-Server from a browser using HTTPS. The FQDN ensures that the secure connection is correctly established.
+4. **What do I need to connect to Code-Server from a browser with HTTPS?**  
+   You need a fully qualified domain name (FQDN) to establish a secure connection.
 
-5. **Can the AI Agent Host on a Raspberry Pi be used in combination with a remote JupyterHub installed on a GPU server?**
+5. **Can the AI Agent Host on a Raspberry Pi be used with a remote JupyterHub on a GPU server?**  
+   Yes, this setup allows real-time analysis on the edge and remote processing on a GPU server.
 
-   Yes, this is one of the unique and powerful features of the AI Agent Host setup. You can use the AI Agent Host installed on a Raspberry Pi for real-time data analysis and decision making at the edge, while also connecting remotely to a JupyterHub installed on a GPU server for handling computationally intensive tasks. This innovative setup opens up new possibilities for AI development, especially in fields like IoT and edge computing.
+6. **Can I use the AI Agent Host with other Raspberry Pi models?**  
+   It should theoretically work on other models, but performance may vary.
 
-6. **Can I use the AI Agent Host with other versions of the Raspberry Pi?**
-   While the AI Agent Host has been tested and works well on the Raspberry Pi 4 8GB model, it should theoretically work on other models with sufficient hardware capabilities. However, performance may vary.
+7. **Which operating systems are compatible with the AI Agent Host?**  
+   It's compatible with DietPi on a Raspberry Pi 4 8GB, but compatibility with other distributions isn't extensively tested.
 
-7. **Which operating systems are compatible with the AI Agent Host?**
-   The AI Agent Host has been tested and found to be compatible with DietPi installed on a Raspberry Pi 4 8GB. Compatibility with other Linux distributions hasn't been extensively tested.
+8. **Can I add my own services to the AI Agent Host?**  
+   Yes, it's designed to be modular for customization.
 
-8. **Can I add my own services to the AI Agent Host?**
-   Absolutely! The AI Agent Host is designed to be modular, allowing you to add or remove Docker containers as needed. This means you can customize the environment to include the exact tools and services that best suit your specific project's needs.
+9. **Where can I get help or support for the AI Agent Host?**  
+   Active communities for Raspberry Pi and AI Agent Host offer support and resources.
 
-9. **What if I need help or support with the AI Agent Host?**
-   There are active communities for both Raspberry Pi and AI Agent Host where you can expect robust support and resources for your AI development projects.
+## Architecture Diagram
 
+![AI Agent Host Diagram](./ai-agent-host-diagram.png)
 
-### AI Agent Host Architecture Diagram
+For a high-resolution diagram, [click here](https://raw.githubusercontent.com/quantiota/Raspberry-Pi-AI-Agent-Host/master/ai-agent-host-diagram.png).
 
- ![AI Agent Host diagram](./ai-agent-host-diagram.png)
- 
-:pencil: High resolution diagram [Application architecture diagram](https://raw.githubusercontent.com/quantiota/Raspberry-Pi-AI-Agent-Host/master/ai-agent-host-diagram.png)
+## References
 
-
-   ## References
-
-
-1. Connect to a JupyterHub from Visual Studio Code. [Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server)
-
-2. Create an API Token. [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
-
+1. [Connect to a JupyterHub from Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server)
+2. [Create an API Token - JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
 3. [Visual Studio Code](https://code.visualstudio.com/)
-
 4. [QuestDB - The Fastest Open Source Time Series Database](https://questdb.io/)
-
 5. [Grafana - The open observability platform](https://grafana.com/)
-
 6. [Langchain](https://python.langchain.com)
+```
 
-
-
+This tutorial provides a structured, step-by-step guide for setting up and using the Raspberry Pi AI Agent Host. You can save this
